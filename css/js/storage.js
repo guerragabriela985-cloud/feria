@@ -124,6 +124,8 @@ function guardarEvento(fecha,nombre,cantidad){
 
     };
 
+    actualizarCantidadesCalendario(datos);
+
     guardarDatos(datos);
 
 }
@@ -143,6 +145,90 @@ function eliminarEvento(fecha){
     delete datos.calendario[fecha];
 
     guardarDatos(datos);
+
+}
+
+
+/*=========================================
+    FERIAS Y CONTEOS AUTOMÁTICOS
+
+function normalizarFerias(feria){
+
+    if(Array.isArray(feria)){
+
+        return feria;
+
+    }
+
+    if(!feria){
+
+        return [];
+
+    }
+
+    return [feria];
+
+}
+
+function formatearFerias(feria){
+
+    const ferias=normalizarFerias(feria);
+
+    return ferias.length ? ferias.join(" / ") : "-";
+
+}
+
+function personaParticipaEnFeria(persona,nombreFeria){
+
+    return normalizarFerias(persona.feria).includes(nombreFeria);
+
+}
+
+function normalizarUbicacionGuardada(ubicacion){
+
+    if(!ubicacion){
+
+        return null;
+
+    }
+
+    if(typeof ubicacion === "string"){
+
+        return { nombre:ubicacion, estadoPago:"noPago" };
+
+    }
+
+    return ubicacion;
+
+}
+
+function actualizarCantidadesCalendario(datos){
+
+    Object.values(datos.calendario).forEach(evento=>{
+
+        if(!evento.nombre){
+
+            return;
+
+        }
+
+        evento.cantidad=Object.values(datos.ubicaciones)
+
+            .map(normalizarUbicacionGuardada)
+
+            .filter(Boolean)
+
+            .filter(ubicacion=>{
+
+                const persona=datos.agenda.find(item=>item.nombre === ubicacion.nombre);
+
+                return persona && personaParticipaEnFeria(persona, evento.nombre);
+
+            }).length;
+
+    });
+
+    return datos;
 
 }
 

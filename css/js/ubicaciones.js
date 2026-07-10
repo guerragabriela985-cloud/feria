@@ -1,3 +1,4 @@
+const modulos = document.querySelectorAll(".gridPuestos");
 const modulo1 = document.getElementById("modulo1");
 
 const emprendedor = document.getElementById("emprendedor");
@@ -32,6 +33,7 @@ const option=document.createElement("option");
 
 option.value=i;
 
+option.textContent=`${e.nombre} (${formatearFerias(e.feria)})`;
 option.textContent=e.nombre;
 
 emprendedor.appendChild(option);
@@ -66,6 +68,17 @@ estadoPago:ubicacion.estadoPago || "noPago"
 
 }
 
+function crearPuesto(numeroPuesto, ubicacion, datos){
+
+const div=document.createElement("div");
+
+div.className="puesto";
+
+div.dataset.numero=numeroPuesto;
+
+const numero=document.createElement("strong");
+
+numero.textContent=numeroPuesto;
 function dibujarPuestos(){
 
 modulo1.innerHTML="";
@@ -100,6 +113,21 @@ div.classList.add("ocupado", ubicacion.estadoPago === "pago" ? "puestoPago" : "p
 
 div.title=`${ubicacion.nombre} - ${ubicacion.estadoPago === "pago" ? "Pago" : "No pago"}`;
 
+}else{
+
+div.title="Puesto libre";
+
+}
+
+div.addEventListener("click",()=>{
+
+puestoActual=numeroPuesto;
+
+puestoSeleccionado.textContent="Puesto "+numeroPuesto;
+
+document.querySelectorAll(".puesto").forEach(puesto=>puesto.classList.remove("puestoSeleccionado"));
+
+div.classList.add("puestoSeleccionado");
 }
 
 div.onclick=()=>{
@@ -121,6 +149,34 @@ emprendedor.value=indicePersona;
 }
 
 }
+
+});
+
+return div;
+
+}
+
+function dibujarPuestos(){
+
+const datos=obtenerDatos();
+
+modulos.forEach(modulo=>{
+
+modulo.innerHTML="";
+
+const inicio=Number(modulo.dataset.inicio);
+
+const fin=Number(modulo.dataset.fin);
+
+for(let i=inicio;i<=fin;i++){
+
+const ubicacion=normalizarUbicacion(datos.ubicaciones[i]);
+
+modulo.appendChild(crearPuesto(i, ubicacion, datos));
+
+}
+
+});
 
 };
 
@@ -154,6 +210,8 @@ estadoPago:estadoPago.value
 
 };
 
+actualizarCantidadesCalendario(datos);
+
 guardarDatos(datos);
 
 dibujarPuestos();
@@ -167,6 +225,8 @@ if(!puestoActual)return;
 const datos=obtenerDatos();
 
 delete datos.ubicaciones[puestoActual];
+
+actualizarCantidadesCalendario(datos);
 
 guardarDatos(datos);
 

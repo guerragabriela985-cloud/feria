@@ -70,6 +70,7 @@
 
 </header>
 
+<main class="agendaMain">
 <main>
 
 <section class="tarjeta">
@@ -99,6 +100,15 @@ type="text"
 id="instagram"
 placeholder="Instagram">
 
+<fieldset class="feriasOpciones">
+
+<legend>Ferias en las que participa</legend>
+
+<label><input type="checkbox" name="feria" value="EUCA"> EUCA</label>
+
+<label><input type="checkbox" name="feria" value="PLATE"> PLATE</label>
+
+</fieldset>
 <select id="feria">
 
 <option value="EUCA">EUCA</option>
@@ -121,11 +131,42 @@ Guardar
 
 <h2>Emprendedores</h2>
 
+<div class="resumenAgenda" id="resumenAgenda"></div>
+
 <input
 type="text"
 id="buscar"
 placeholder="Buscar...">
 
+<div class="tablaResponsive">
+
+<table class="tablaAgenda">
+
+<thead>
+
+<tr>
+
+<th>Nombre</th>
+
+<th>Rubro</th>
+
+<th>Teléfono</th>
+
+<th>Instagram</th>
+
+<th>Feria</th>
+
+<th>Acciones</th>
+
+</tr>
+
+</thead>
+
+<tbody id="listaAgenda"></tbody>
+
+</table>
+
+</div>
 <div id="listaAgenda"></div>
 
 </section>
