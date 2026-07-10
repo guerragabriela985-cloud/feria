@@ -32,7 +32,7 @@ const option=document.createElement("option");
 
 option.value=i;
 
-option.textContent=e.nombre;
+option.textContent=`${e.nombre} (${formatearFerias(e.feria)})`;
 
 emprendedor.appendChild(option);
 
@@ -176,6 +176,8 @@ estadoPago:estadoPago.value
 
 };
 
+actualizarCantidadesCalendario(datos);
+
 guardarDatos(datos);
 
 dibujarPuestos();
@@ -189,6 +191,8 @@ if(!puestoActual)return;
 const datos=obtenerDatos();
 
 delete datos.ubicaciones[puestoActual];
+
+actualizarCantidadesCalendario(datos);
 
 guardarDatos(datos);
 

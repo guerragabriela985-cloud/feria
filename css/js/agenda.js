@@ -14,7 +14,7 @@ const telefonoInput = document.getElementById("telefono");
 
 const instagramInput = document.getElementById("instagram");
 
-const feriaInput = document.getElementById("feria");
+const feriaInputs = document.querySelectorAll('input[name="feria"]');
 
 let indiceEditar = null;
 
@@ -24,11 +24,42 @@ form.addEventListener("submit", guardar);
 
 buscar.addEventListener("input", mostrarAgenda);
 
+
+function obtenerFeriasSeleccionadas(){
+
+return Array.from(feriaInputs)
+
+.filter(input=>input.checked)
+
+.map(input=>input.value);
+
+}
+
+function marcarFerias(ferias){
+
+feriaInputs.forEach(input=>{
+
+input.checked=ferias.includes(input.value);
+
+});
+
+}
+
 function guardar(e){
 
 e.preventDefault();
 
 const datos = obtenerDatos();
+
+const feriasSeleccionadas=obtenerFeriasSeleccionadas();
+
+if(feriasSeleccionadas.length === 0){
+
+alert("Seleccione al menos una feria para el emprendedor.");
+
+return;
+
+}
 
 const emprendedor={
 
@@ -40,7 +71,7 @@ telefono:telefonoInput.value.trim(),
 
 instagram:instagramInput.value.trim(),
 
-feria:feriaInput.value
+feria:feriasSeleccionadas
 
 };
 
@@ -56,9 +87,13 @@ indiceEditar=null;
 
 }
 
+actualizarCantidadesCalendario(datos);
+
 guardarDatos(datos);
 
 form.reset();
+
+marcarFerias([]);
 
 mostrarAgenda();
 
@@ -66,7 +101,7 @@ mostrarAgenda();
 
 function coincideBusqueda(persona,texto){
 
-return [persona.nombre, persona.rubro, persona.telefono, persona.instagram, persona.feria]
+return [persona.nombre, persona.rubro, persona.telefono, persona.instagram, formatearFerias(persona.feria)]
 
 .some(valor => (valor || "").toLowerCase().includes(texto));
 
@@ -76,9 +111,9 @@ function mostrarResumenAgenda(datos){
 
 const total=datos.agenda.length;
 
-const totalEuca=datos.agenda.filter(persona=>persona.feria === "EUCA").length;
+const totalEuca=datos.agenda.filter(persona=>personaParticipaEnFeria(persona,"EUCA")).length;
 
-const totalPlate=datos.agenda.filter(persona=>persona.feria === "PLATE").length;
+const totalPlate=datos.agenda.filter(persona=>personaParticipaEnFeria(persona,"PLATE")).length;
 
 resumenAgenda.innerHTML="";
 
@@ -154,7 +189,7 @@ emprendedoresFiltrados.forEach(({persona,index})=>{
 
 const fila=document.createElement("tr");
 
-[persona.nombre, persona.rubro, persona.telefono, persona.instagram, persona.feria].forEach(valor=>{
+[persona.nombre, persona.rubro, persona.telefono, persona.instagram, formatearFerias(persona.feria)].forEach(valor=>{
 
 const celda=document.createElement("td");
 
@@ -212,7 +247,7 @@ telefonoInput.value=p.telefono;
 
 instagramInput.value=p.instagram;
 
-feriaInput.value=p.feria;
+marcarFerias(normalizarFerias(p.feria));
 
 indiceEditar=i;
 
@@ -223,6 +258,8 @@ function eliminar(i){
 const datos=obtenerDatos();
 
 datos.agenda.splice(i,1);
+
+actualizarCantidadesCalendario(datos);
 
 guardarDatos(datos);
 
