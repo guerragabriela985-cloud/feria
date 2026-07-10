@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ubicaciones</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo">
+    
+            <h2>Feria</h2>
+    
+            <span>Manager</span>
+    
+        </div>
+    
+        <nav>
+    
+            <ul>
+    
+                <li id="menuCalendario">
+                    <a href="index.html">
+                        <span>📅</span>
+                        Calendario
+                    </a>
+                </li>
+    
+                <li id="menuAgenda">
+                    <a href="agenda.html">
+                        <span>👥</span>
+                        Agenda
+                    </a>
+                </li>
+    
+                <li id="menuUbicaciones">
+                    <a href="ubicaciones.html">
+                        <span>📍</span>
+                        Ubicaciones
+                    </a>
+                </li>
+    
+                <li id="menuPagos">
+                    <a href="pagos.html">
+                        <span>💲</span>
+                        Pagos
+                    </a>
+                </li>
+    
+            </ul>
+    
+        </nav>
+    
+    </aside>
+
+<div class="contenido">
+
+<header>
+
+<h1>Ubicación de Puestos</h1>
+
+</header>
+
+<main>
+
+<section class="tarjeta">
+
+<h2>Módulo 1</h2>
+
+<div class="gridPuestos" id="modulo1"></div>
+
+</section>
+
+<section class="tarjeta">
+
+<h2>Asignación</h2>
+
+<p id="puestoSeleccionado">
+
+Seleccione un puesto
+
+</p>
+
+<select id="emprendedor">
+
+</select>
+
+<button id="guardarUbicacion">
+
+Guardar</button>
+
+<button id="liberarPuesto">
+
+Liberar</button>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="js/storage.js"></script>
+
+<script src="js/ubicaciones.js"></script>
+<script>
+
+    document.getElementById("menuUbicaciones").classList.add("activo");
+    
+    </script>
+</body>
+
+</html>

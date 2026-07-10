@@ -1,0 +1,830 @@
+/* ===========================
+   FERIA MANAGER
+   Hoja de estilos principal
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+
+    --color-principal:#2F80ED;
+    --color-principal-hover:#1769d6;
+
+    --color-fondo:#f5f7fb;
+    --color-menu:#1f2937;
+
+    --color-blanco:#ffffff;
+
+    --color-texto:#2d3436;
+    --color-texto-claro:#7f8c8d;
+
+    --color-borde:#e5e7eb;
+
+    --sombra:0 10px 30px rgba(0,0,0,.08);
+
+    --radio:18px;
+
+    --transicion:.25s;
+
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+    background:var(--color-fondo);
+    color:var(--color-texto);
+
+    overflow-x:hidden;
+
+}
+
+/* APP */
+
+.app{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+/* MENU */
+
+.sidebar{
+
+    width:260px;
+
+    background:var(--color-menu);
+
+    color:white;
+
+    display:flex;
+
+    flex-direction:column;
+
+    transition:.35s;
+
+    box-shadow:var(--sombra);
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    bottom:0;
+
+    z-index:100;
+
+}
+
+.logo{
+
+    padding:35px 25px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.logo h2{
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+.logo span{
+
+    color:#9ec8ff;
+
+    font-size:15px;
+
+}
+
+.sidebar ul{
+
+    list-style:none;
+
+    margin-top:25px;
+
+}
+
+.sidebar li{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:18px 28px;
+
+    cursor:pointer;
+
+    transition:var(--transicion);
+
+    font-size:16px;
+
+}
+
+.sidebar li:hover{
+
+    background:rgba(255,255,255,.08);
+
+}
+
+.sidebar li.activo{
+
+    background:var(--color-principal);
+
+}
+
+.sidebar li span{
+
+    font-size:22px;
+
+}
+
+/* CONTENIDO */
+
+.contenido{
+
+    flex:1;
+
+    margin-left:260px;
+
+    padding:35px;
+
+}
+
+/* HEADER */
+
+header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+header h1{
+
+    font-size:30px;
+
+    font-weight:600;
+
+}
+
+.menu{
+
+    display:none;
+
+}
+
+/* MAIN */
+
+main{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:25px;
+
+}
+/* ==========================================
+   TARJETAS
+========================================== */
+
+.tarjeta,
+.detalle{
+
+    background:var(--color-blanco);
+
+    border-radius:var(--radio);
+
+    box-shadow:var(--sombra);
+
+    padding:25px;
+
+    animation:aparecer .5s ease;
+
+}
+
+.detalle{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+    min-height:620px;
+
+}
+
+/* ==========================================
+   CABECERA DEL CALENDARIO
+========================================== */
+
+.cabecera-calendario{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.cabecera-calendario h2{
+
+    font-size:24px;
+
+    font-weight:600;
+
+}
+
+.cabecera-calendario button{
+
+    width:45px;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    background:var(--color-principal);
+
+    color:white;
+
+    font-size:18px;
+
+    transition:.25s;
+
+}
+
+.cabecera-calendario button:hover{
+
+    background:var(--color-principal-hover);
+
+    transform:scale(1.08);
+
+}
+
+/* ==========================================
+   DÍAS DE LA SEMANA
+========================================== */
+
+.dias-semana{
+
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    margin-bottom:15px;
+
+}
+
+.dias-semana div{
+
+    text-align:center;
+
+    font-weight:600;
+
+    color:var(--color-texto-claro);
+
+    padding:10px;
+
+}
+
+/* ==========================================
+   CALENDARIO
+========================================== */
+
+.calendario{
+
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    gap:10px;
+
+}
+
+.dia{
+
+    height:90px;
+
+    border-radius:16px;
+
+    background:#fafafa;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    border:2px solid transparent;
+
+    transition:.25s;
+
+    position:relative;
+
+}
+
+.dia:hover{
+
+    transform:translateY(-4px);
+
+    background:#eef5ff;
+
+    border-color:var(--color-principal);
+
+}
+
+.vacio{
+
+    background:transparent;
+
+    pointer-events:none;
+
+    box-shadow:none;
+
+}
+
+/* Día seleccionado */
+
+.seleccionado{
+
+    background:var(--color-principal);
+
+    color:white;
+
+}
+
+/* Hoy */
+
+.hoy{
+
+    border:2px solid #27ae60;
+
+}
+
+/* ==========================================
+   FERIAS
+========================================== */
+
+.euca{
+
+    background:#27ae60 !important;
+
+    color:white;
+
+}
+
+.plate{
+
+    background:#e67e22 !important;
+
+    color:white;
+
+}
+
+.euca::after{
+
+    content:"E";
+
+    position:absolute;
+
+    bottom:6px;
+
+    right:8px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+.plate::after{
+
+    content:"P";
+
+    position:absolute;
+
+    bottom:6px;
+
+    right:8px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+/* ==========================================
+   PANEL DERECHO
+========================================== */
+
+.detalle h3{
+
+    font-size:22px;
+
+}
+
+#detalleDia{
+
+    background:#f7f9fc;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    min-height:180px;
+
+    line-height:1.7;
+
+    border:1px solid var(--color-borde);
+
+}
+
+.botones{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+.botones button{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+#btnEuca{
+
+    background:#27ae60;
+
+}
+
+#btnPlate{
+
+    background:#e67e22;
+
+}
+
+.botones button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 20px rgba(0,0,0,.15);
+
+}
+
+/* ==========================================
+   ANIMACIONES
+========================================== */
+
+@keyframes aparecer{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   SCROLL
+========================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--color-principal);
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#edf2f7;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:1000px){
+
+    main{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .detalle{
+
+        min-height:auto;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .sidebar{
+
+        width:220px;
+
+        transform:translateX(-100%);
+
+    }
+
+    .sidebar.abierto{
+
+        transform:translateX(0);
+
+    }
+
+    .contenido{
+
+        margin-left:0;
+
+        padding:20px;
+
+    }
+
+    .menu{
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:center;
+
+        width:45px;
+
+        height:45px;
+
+        border-radius:10px;
+
+        background:var(--color-principal);
+
+        color:white;
+
+        cursor:pointer;
+
+        font-size:22px;
+
+    }
+
+    header{
+
+        gap:15px;
+
+    }
+
+    header h1{
+
+        font-size:22px;
+
+    }
+
+    .dia{
+
+        height:65px;
+
+        font-size:14px;
+
+    }
+
+}
+/*==========================
+FORMULARIOS
+===========================*/
+
+form{
+
+    display:flex;
+    
+    flex-direction:column;
+    
+    gap:15px;
+    
+    margin-top:20px;
+    
+    }
+    
+    input,
+    select{
+    
+    padding:14px;
+    
+    border:1px solid #dfe6e9;
+    
+    border-radius:10px;
+    
+    font-size:15px;
+    
+    font-family:Poppins,sans-serif;
+    
+    }
+    
+    button{
+    
+    padding:14px;
+    
+    border:none;
+    
+    border-radius:10px;
+    
+    background:#2F80ED;
+    
+    color:white;
+    
+    cursor:pointer;
+    
+    font-size:15px;
+    
+    transition:.25s;
+    
+    }
+    
+    button:hover{
+    
+    background:#1769d6;
+    
+    }
+    
+    .emprendedor,
+    .pago{
+    
+    background:white;
+    
+    padding:15px;
+    
+    border-radius:12px;
+    
+    margin-bottom:15px;
+    
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+    
+    }
+    
+    .emprendedor h3,
+    .pago h3{
+    
+    margin-bottom:8px;
+    
+    }
+    
+    .emprendedor button,
+    .pago button{
+    
+    margin-top:10px;
+    
+    margin-right:10px;
+    
+    }
+    .sidebar ul{
+
+        list-style:none;
+    
+        margin-top:25px;
+    
+    }
+    
+    .sidebar li{
+    
+        transition:.25s;
+    
+    }
+    
+    .sidebar li a{
+    
+        display:flex;
+    
+        align-items:center;
+    
+        gap:15px;
+    
+        padding:18px 28px;
+    
+        color:white;
+    
+        text-decoration:none;
+    
+        font-size:16px;
+    
+    }
+    
+    .sidebar li:hover{
+    
+        background:rgba(255,255,255,.08);
+    
+    }
+    
+    .sidebar li.activo{
+    
+        background:#2F80ED;
+    
+    }
+    
+    .sidebar li span{
+    
+        font-size:22px;
+    
+    }
+    .feria{
+
+        background:#2F80ED;
+        color:white;
+    
+    }
+    
+    .contenidoFeria{
+    
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        height:100%;
+        gap:3px;
+        text-align:center;
+    
+    }
+    
+    .contenidoFeria strong{
+    
+        font-size:18px;
+    
+    }
+    
+    .contenidoFeria small{
+    
+        font-size:11px;
+        font-weight:600;
+    
+    }
+    
+    .contenidoFeria span{
+    
+        font-size:11px;
+    
+    }

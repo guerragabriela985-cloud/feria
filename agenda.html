@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Agenda</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo">
+    
+            <h2>Feria</h2>
+    
+            <span>Manager</span>
+    
+        </div>
+    
+        <nav>
+    
+            <ul>
+    
+                <li id="menuCalendario">
+                    <a href="index.html">
+                        <span>📅</span>
+                        Calendario
+                    </a>
+                </li>
+    
+                <li id="menuAgenda">
+                    <a href="agenda.html">
+                        <span>👥</span>
+                        Agenda
+                    </a>
+                </li>
+    
+                <li id="menuUbicaciones">
+                    <a href="ubicaciones.html">
+                        <span>📍</span>
+                        Ubicaciones
+                    </a>
+                </li>
+    
+                <li id="menuPagos">
+                    <a href="pagos.html">
+                        <span>💲</span>
+                        Pagos
+                    </a>
+                </li>
+    
+            </ul>
+    
+        </nav>
+    
+    </aside>
+
+<div class="contenido">
+
+<header>
+
+<h1>Agenda de Emprendedores</h1>
+
+</header>
+
+<main>
+
+<section class="tarjeta">
+
+<h2>Nuevo Emprendedor</h2>
+
+<form id="formAgenda">
+
+<input
+type="text"
+id="nombre"
+placeholder="Nombre"
+required>
+
+<input
+type="text"
+id="rubro"
+placeholder="Rubro">
+
+<input
+type="text"
+id="telefono"
+placeholder="Teléfono">
+
+<input
+type="text"
+id="instagram"
+placeholder="Instagram">
+
+<select id="feria">
+
+<option value="EUCA">EUCA</option>
+
+<option value="PLATE">PLATE</option>
+
+</select>
+
+<button type="submit">
+
+Guardar
+
+</button>
+
+</form>
+
+</section>
+
+<section class="tarjeta">
+
+<h2>Emprendedores</h2>
+
+<input
+type="text"
+id="buscar"
+placeholder="Buscar...">
+
+<div id="listaAgenda"></div>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="js/storage.js"></script>
+
+<script src="js/agenda.js"></script>
+<script>
+
+    document.getElementById("menuAgenda").classList.add("activo");
+    
+    </script>
+
+</body>
+
+</html>
