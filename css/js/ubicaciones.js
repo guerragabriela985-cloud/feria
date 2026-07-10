@@ -84,6 +84,14 @@ const datos=obtenerDatos();
 
 const persona=datos.agenda[emprendedor.value];
 
+if(!persona){
+
+alert("Primero cargue un emprendedor en la agenda.");
+
+return;
+
+}
+
 datos.ubicaciones[puestoActual]=persona.nombre;
 
 guardarDatos(datos);
