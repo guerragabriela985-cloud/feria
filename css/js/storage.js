@@ -151,7 +151,6 @@ function eliminarEvento(fecha){
 
 /*=========================================
     FERIAS Y CONTEOS AUTOMÁTICOS
-==========================================*/
 
 function normalizarFerias(feria){
 

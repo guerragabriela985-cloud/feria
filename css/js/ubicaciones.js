@@ -1,4 +1,5 @@
 const modulos = document.querySelectorAll(".gridPuestos");
+const modulo1 = document.getElementById("modulo1");
 
 const emprendedor = document.getElementById("emprendedor");
 
@@ -33,6 +34,7 @@ const option=document.createElement("option");
 option.value=i;
 
 option.textContent=`${e.nombre} (${formatearFerias(e.feria)})`;
+option.textContent=e.nombre;
 
 emprendedor.appendChild(option);
 
@@ -77,6 +79,25 @@ div.dataset.numero=numeroPuesto;
 const numero=document.createElement("strong");
 
 numero.textContent=numeroPuesto;
+function dibujarPuestos(){
+
+modulo1.innerHTML="";
+
+const datos=obtenerDatos();
+
+for(let i=1;i<=20;i++){
+
+const div=document.createElement("div");
+
+const ubicacion=normalizarUbicacion(datos.ubicaciones[i]);
+
+div.className="puesto";
+
+div.dataset.numero=i;
+
+const numero=document.createElement("strong");
+
+numero.textContent=i;
 
 div.appendChild(numero);
 
@@ -107,6 +128,13 @@ puestoSeleccionado.textContent="Puesto "+numeroPuesto;
 document.querySelectorAll(".puesto").forEach(puesto=>puesto.classList.remove("puestoSeleccionado"));
 
 div.classList.add("puestoSeleccionado");
+}
+
+div.onclick=()=>{
+
+puestoActual=i;
+
+puestoSeleccionado.textContent="Puesto "+i;
 
 if(ubicacion){
 
@@ -149,6 +177,12 @@ modulo.appendChild(crearPuesto(i, ubicacion, datos));
 }
 
 });
+
+};
+
+modulo1.appendChild(div);
+
+}
 
 }
 
