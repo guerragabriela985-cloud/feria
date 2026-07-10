@@ -17,49 +17,49 @@
     <aside class="sidebar" id="sidebar">
 
         <div class="logo">
-    
+
             <h2>Feria</h2>
-    
+
             <span>Manager</span>
-    
+
         </div>
-    
+
         <nav>
-    
+
             <ul>
-    
+
                 <li id="menuCalendario">
                     <a href="index.html">
                         <span>📅</span>
                         Calendario
                     </a>
                 </li>
-    
+
                 <li id="menuAgenda">
                     <a href="agenda.html">
                         <span>👥</span>
                         Agenda
                     </a>
                 </li>
-    
+
                 <li id="menuUbicaciones">
                     <a href="ubicaciones.html">
                         <span>📍</span>
                         Ubicaciones
                     </a>
                 </li>
-    
+
                 <li id="menuPagos">
                     <a href="pagos.html">
                         <span>💲</span>
                         Pagos
                     </a>
                 </li>
-    
+
             </ul>
-    
+
         </nav>
-    
+
     </aside>
 
 <div class="contenido">
@@ -75,6 +75,14 @@
 <section class="tarjeta">
 
 <h2>Módulo 1</h2>
+
+<div class="leyendaPuestos">
+
+<span><strong class="colorPago"></strong> Pago</span>
+
+<span><strong class="colorNoPago"></strong> No pago</span>
+
+</div>
 
 <div class="gridPuestos" id="modulo1"></div>
 
@@ -94,6 +102,16 @@ Seleccione un puesto
 
 </select>
 
+<label for="estadoPago">Estado de pago</label>
+
+<select id="estadoPago">
+
+<option value="pago">Pago</option>
+
+<option value="noPago">No pago</option>
+
+</select>
+
 <button id="guardarUbicacion">
 
 Guardar</button>
@@ -108,13 +126,13 @@ Liberar</button>
 
 </div>
 
-<script src="js/storage.js"></script>
+<script src="css/js/storage.js"></script>
 
-<script src="js/ubicaciones.js"></script>
+<script src="css/js/ubicaciones.js"></script>
 <script>
 
     document.getElementById("menuUbicaciones").classList.add("activo");
-    
+
     </script>
 </body>
 

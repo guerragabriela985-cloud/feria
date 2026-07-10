@@ -2,6 +2,8 @@ const modulo1 = document.getElementById("modulo1");
 
 const emprendedor = document.getElementById("emprendedor");
 
+const estadoPago = document.getElementById("estadoPago");
+
 const puestoSeleccionado = document.getElementById("puestoSeleccionado");
 
 const guardarBtn = document.getElementById("guardarUbicacion");
@@ -38,6 +40,32 @@ emprendedor.appendChild(option);
 
 }
 
+function normalizarUbicacion(ubicacion){
+
+if(!ubicacion)return null;
+
+if(typeof ubicacion === "string"){
+
+return {
+
+nombre:ubicacion,
+
+estadoPago:"noPago"
+
+};
+
+}
+
+return {
+
+nombre:ubicacion.nombre,
+
+estadoPago:ubicacion.estadoPago || "noPago"
+
+};
+
+}
+
 function dibujarPuestos(){
 
 modulo1.innerHTML="";
@@ -48,17 +76,29 @@ for(let i=1;i<=20;i++){
 
 const div=document.createElement("div");
 
+const ubicacion=normalizarUbicacion(datos.ubicaciones[i]);
+
 div.className="puesto";
 
 div.dataset.numero=i;
 
-div.textContent=i;
+const numero=document.createElement("strong");
 
-if(datos.ubicaciones[i]){
+numero.textContent=i;
 
-div.classList.add("ocupado");
+div.appendChild(numero);
 
-div.title=datos.ubicaciones[i];
+if(ubicacion){
+
+const nombre=document.createElement("small");
+
+nombre.textContent=ubicacion.nombre;
+
+div.appendChild(nombre);
+
+div.classList.add("ocupado", ubicacion.estadoPago === "pago" ? "puestoPago" : "puestoNoPago");
+
+div.title=`${ubicacion.nombre} - ${ubicacion.estadoPago === "pago" ? "Pago" : "No pago"}`;
 
 }
 
@@ -67,6 +107,20 @@ div.onclick=()=>{
 puestoActual=i;
 
 puestoSeleccionado.textContent="Puesto "+i;
+
+if(ubicacion){
+
+estadoPago.value=ubicacion.estadoPago;
+
+const indicePersona=datos.agenda.findIndex(persona=>persona.nombre === ubicacion.nombre);
+
+if(indicePersona >= 0){
+
+emprendedor.value=indicePersona;
+
+}
+
+}
 
 };
 
@@ -84,7 +138,21 @@ const datos=obtenerDatos();
 
 const persona=datos.agenda[emprendedor.value];
 
-datos.ubicaciones[puestoActual]=persona.nombre;
+if(!persona){
+
+alert("Primero cargue un emprendedor en la agenda.");
+
+return;
+
+}
+
+datos.ubicaciones[puestoActual]={
+
+nombre:persona.nombre,
+
+estadoPago:estadoPago.value
+
+};
 
 guardarDatos(datos);
 

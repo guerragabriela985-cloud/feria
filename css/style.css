@@ -828,3 +828,108 @@ form{
         font-size:11px;
     
     }
+/* ==========================================
+   UBICACIONES
+========================================== */
+
+.gridPuestos{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(90px,1fr));
+    gap:12px;
+    margin-top:20px;
+
+}
+
+.puesto{
+
+    min-height:80px;
+    border-radius:14px;
+    background:#eef2f7;
+    color:var(--color-texto);
+    border:2px solid var(--color-borde);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:6px;
+    cursor:pointer;
+    text-align:center;
+    transition:var(--transicion);
+
+}
+
+.puesto:hover{
+
+    transform:translateY(-3px);
+    border-color:var(--color-principal);
+
+}
+
+.puesto small{
+
+    max-width:100%;
+    padding:0 6px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size:11px;
+
+}
+
+.puestoPago{
+
+    background:#27ae60;
+    border-color:#219653;
+    color:white;
+
+}
+
+.puestoNoPago{
+
+    background:#eb5757;
+    border-color:#c0392b;
+    color:white;
+
+}
+
+.leyendaPuestos{
+
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-top:12px;
+    color:var(--color-texto-claro);
+    font-size:14px;
+
+}
+
+.leyendaPuestos span{
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+}
+
+.colorPago,
+.colorNoPago{
+
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    display:inline-block;
+
+}
+
+.colorPago{
+
+    background:#27ae60;
+
+}
+
+.colorNoPago{
+
+    background:#eb5757;
+
+}

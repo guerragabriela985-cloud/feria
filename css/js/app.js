@@ -6,15 +6,19 @@
 const sidebar = document.getElementById("sidebar");
 const menu = document.querySelector(".menu");
 
-menu.addEventListener("click", () => {
-    sidebar.classList.toggle("abierto");
-});
+if (sidebar && menu) {
+    menu.addEventListener("click", () => {
+        sidebar.classList.toggle("abierto");
+    });
+}
 
 document.addEventListener("click", (e) => {
 
     if (window.innerWidth > 768) return;
 
     if (
+        sidebar &&
+        menu &&
         !sidebar.contains(e.target) &&
         !menu.contains(e.target)
     ) {
@@ -25,7 +29,7 @@ document.addEventListener("click", (e) => {
 
 window.addEventListener("resize", () => {
 
-    if (window.innerWidth > 768) {
+    if (sidebar && window.innerWidth > 768) {
         sidebar.classList.remove("abierto");
     }
 
@@ -88,13 +92,13 @@ tarjetas.forEach(card => {
 
 document.addEventListener("keydown", (e) => {
 
-    if (e.key === "ArrowLeft") {
+    if (e.key === "ArrowLeft" && typeof btnAnterior !== "undefined" && btnAnterior) {
 
         btnAnterior.click();
 
     }
 
-    if (e.key === "ArrowRight") {
+    if (e.key === "ArrowRight" && typeof btnSiguiente !== "undefined" && btnSiguiente) {
 
         btnSiguiente.click();
 

@@ -38,6 +38,14 @@ const datos=obtenerDatos();
 
 const persona=datos.agenda[emprendedorPago.value];
 
+if(!persona){
+
+alert("Primero cargue un emprendedor en la agenda.");
+
+return;
+
+}
+
 const pago={
 
 nombre:persona.nombre,
