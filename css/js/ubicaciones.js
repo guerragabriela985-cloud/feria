@@ -1,6 +1,8 @@
-const modulo1 = document.getElementById("modulo1");
+const modulos = document.querySelectorAll(".gridPuestos");
 
 const emprendedor = document.getElementById("emprendedor");
+
+const estadoPago = document.getElementById("estadoPago");
 
 const puestoSeleccionado = document.getElementById("puestoSeleccionado");
 
@@ -38,41 +40,115 @@ emprendedor.appendChild(option);
 
 }
 
-function dibujarPuestos(){
+function normalizarUbicacion(ubicacion){
 
-modulo1.innerHTML="";
+if(!ubicacion)return null;
 
-const datos=obtenerDatos();
+if(typeof ubicacion === "string"){
 
-for(let i=1;i<=20;i++){
+return {
+
+nombre:ubicacion,
+
+estadoPago:"noPago"
+
+};
+
+}
+
+return {
+
+nombre:ubicacion.nombre,
+
+estadoPago:ubicacion.estadoPago || "noPago"
+
+};
+
+}
+
+function crearPuesto(numeroPuesto, ubicacion, datos){
 
 const div=document.createElement("div");
 
 div.className="puesto";
 
-div.dataset.numero=i;
+div.dataset.numero=numeroPuesto;
 
-div.textContent=i;
+const numero=document.createElement("strong");
 
-if(datos.ubicaciones[i]){
+numero.textContent=numeroPuesto;
 
-div.classList.add("ocupado");
+div.appendChild(numero);
 
-div.title=datos.ubicaciones[i];
+if(ubicacion){
+
+const nombre=document.createElement("small");
+
+nombre.textContent=ubicacion.nombre;
+
+div.appendChild(nombre);
+
+div.classList.add("ocupado", ubicacion.estadoPago === "pago" ? "puestoPago" : "puestoNoPago");
+
+div.title=`${ubicacion.nombre} - ${ubicacion.estadoPago === "pago" ? "Pago" : "No pago"}`;
+
+}else{
+
+div.title="Puesto libre";
 
 }
 
-div.onclick=()=>{
+div.addEventListener("click",()=>{
 
-puestoActual=i;
+puestoActual=numeroPuesto;
 
-puestoSeleccionado.textContent="Puesto "+i;
+puestoSeleccionado.textContent="Puesto "+numeroPuesto;
 
-};
+document.querySelectorAll(".puesto").forEach(puesto=>puesto.classList.remove("puestoSeleccionado"));
 
-modulo1.appendChild(div);
+div.classList.add("puestoSeleccionado");
+
+if(ubicacion){
+
+estadoPago.value=ubicacion.estadoPago;
+
+const indicePersona=datos.agenda.findIndex(persona=>persona.nombre === ubicacion.nombre);
+
+if(indicePersona >= 0){
+
+emprendedor.value=indicePersona;
 
 }
+
+}
+
+});
+
+return div;
+
+}
+
+function dibujarPuestos(){
+
+const datos=obtenerDatos();
+
+modulos.forEach(modulo=>{
+
+modulo.innerHTML="";
+
+const inicio=Number(modulo.dataset.inicio);
+
+const fin=Number(modulo.dataset.fin);
+
+for(let i=inicio;i<=fin;i++){
+
+const ubicacion=normalizarUbicacion(datos.ubicaciones[i]);
+
+modulo.appendChild(crearPuesto(i, ubicacion, datos));
+
+}
+
+});
 
 }
 
@@ -84,7 +160,21 @@ const datos=obtenerDatos();
 
 const persona=datos.agenda[emprendedor.value];
 
-datos.ubicaciones[puestoActual]=persona.nombre;
+if(!persona){
+
+alert("Primero cargue un emprendedor en la agenda.");
+
+return;
+
+}
+
+datos.ubicaciones[puestoActual]={
+
+nombre:persona.nombre,
+
+estadoPago:estadoPago.value
+
+};
 
 guardarDatos(datos);
 

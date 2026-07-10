@@ -17,49 +17,49 @@
     <aside class="sidebar" id="sidebar">
 
         <div class="logo">
-    
+
             <h2>Feria</h2>
-    
+
             <span>Manager</span>
-    
+
         </div>
-    
+
         <nav>
-    
+
             <ul>
-    
+
                 <li id="menuCalendario">
                     <a href="index.html">
                         <span>📅</span>
                         Calendario
                     </a>
                 </li>
-    
+
                 <li id="menuAgenda">
                     <a href="agenda.html">
                         <span>👥</span>
                         Agenda
                     </a>
                 </li>
-    
+
                 <li id="menuUbicaciones">
                     <a href="ubicaciones.html">
                         <span>📍</span>
                         Ubicaciones
                     </a>
                 </li>
-    
+
                 <li id="menuPagos">
                     <a href="pagos.html">
                         <span>💲</span>
                         Pagos
                     </a>
                 </li>
-    
+
             </ul>
-    
+
         </nav>
-    
+
     </aside>
 
 <div class="contenido">
@@ -70,7 +70,7 @@
 
 </header>
 
-<main>
+<main class="agendaMain">
 
 <section class="tarjeta">
 
@@ -121,12 +121,42 @@ Guardar
 
 <h2>Emprendedores</h2>
 
+<div class="resumenAgenda" id="resumenAgenda"></div>
+
 <input
 type="text"
 id="buscar"
 placeholder="Buscar...">
 
-<div id="listaAgenda"></div>
+<div class="tablaResponsive">
+
+<table class="tablaAgenda">
+
+<thead>
+
+<tr>
+
+<th>Nombre</th>
+
+<th>Rubro</th>
+
+<th>Teléfono</th>
+
+<th>Instagram</th>
+
+<th>Feria</th>
+
+<th>Acciones</th>
+
+</tr>
+
+</thead>
+
+<tbody id="listaAgenda"></tbody>
+
+</table>
+
+</div>
 
 </section>
 
@@ -134,13 +164,13 @@ placeholder="Buscar...">
 
 </div>
 
-<script src="js/storage.js"></script>
+<script src="css/js/storage.js"></script>
 
-<script src="js/agenda.js"></script>
+<script src="css/js/agenda.js"></script>
 <script>
 
     document.getElementById("menuAgenda").classList.add("activo");
-    
+
     </script>
 
 </body>

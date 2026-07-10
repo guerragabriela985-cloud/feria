@@ -62,11 +62,33 @@ function inicializarStorage(){
 
 function obtenerDatos(){
 
-    return JSON.parse(
+    const datosGuardados = localStorage.getItem(STORAGE_KEY);
 
-        localStorage.getItem(STORAGE_KEY)
+    if (!datosGuardados) {
 
-    );
+        return JSON.parse(JSON.stringify(estructuraInicial));
+
+    }
+
+    try {
+
+        return {
+
+            ...JSON.parse(JSON.stringify(estructuraInicial)),
+
+            ...JSON.parse(datosGuardados)
+
+        };
+
+    } catch (error) {
+
+        console.warn("No se pudieron leer los datos guardados. Se reinicia la base local.", error);
+
+        guardarDatos(estructuraInicial);
+
+        return JSON.parse(JSON.stringify(estructuraInicial));
+
+    }
 
 }
 

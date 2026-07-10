@@ -828,3 +828,307 @@ form{
         font-size:11px;
     
     }
+/* ==========================================
+   UBICACIONES
+========================================== */
+
+.gridPuestos{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(90px,1fr));
+    gap:12px;
+    margin-top:20px;
+
+}
+
+.puesto{
+
+    min-height:80px;
+    border-radius:14px;
+    background:#eef2f7;
+    color:var(--color-texto);
+    border:2px solid var(--color-borde);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:6px;
+    cursor:pointer;
+    text-align:center;
+    transition:var(--transicion);
+
+}
+
+.puesto:hover{
+
+    transform:translateY(-3px);
+    border-color:var(--color-principal);
+
+}
+
+.puesto small{
+
+    max-width:100%;
+    padding:0 6px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size:11px;
+
+}
+
+.puestoPago{
+
+    background:#27ae60;
+    border-color:#219653;
+    color:white;
+
+}
+
+.puestoNoPago{
+
+    background:#eb5757;
+    border-color:#c0392b;
+    color:white;
+
+}
+
+.leyendaPuestos{
+
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-top:12px;
+    color:var(--color-texto-claro);
+    font-size:14px;
+
+}
+
+.leyendaPuestos span{
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+}
+
+.colorPago,
+.colorNoPago{
+
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    display:inline-block;
+
+}
+
+.colorPago{
+
+    background:#27ae60;
+
+}
+
+.colorNoPago{
+
+    background:#eb5757;
+
+}
+
+/* ==========================================
+   AGENDA VISUAL
+========================================== */
+
+.resumenAgenda{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
+    gap:12px;
+    margin:15px 0;
+
+}
+
+.resumenAgendaCard{
+
+    background:#eef5ff;
+    border:1px solid #d7e8ff;
+    border-radius:14px;
+    padding:14px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+
+}
+
+.resumenAgendaCard strong{
+
+    color:var(--color-principal);
+    font-size:24px;
+
+}
+
+.resumenAgendaCard span{
+
+    color:var(--color-texto-claro);
+    font-size:13px;
+
+}
+
+.tablaResponsive{
+
+    width:100%;
+    overflow-x:auto;
+    margin-top:18px;
+
+}
+
+.tablaAgenda{
+
+    width:100%;
+    border-collapse:collapse;
+    min-width:720px;
+
+}
+
+.tablaAgenda th,
+.tablaAgenda td{
+
+    padding:14px;
+    border-bottom:1px solid var(--color-borde);
+    text-align:left;
+    vertical-align:middle;
+
+}
+
+.tablaAgenda th{
+
+    background:#f7f9fc;
+    color:var(--color-texto-claro);
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+
+}
+
+.tablaAgenda tr:hover td{
+
+    background:#fbfdff;
+
+}
+
+.tablaAgenda button{
+
+    margin:4px 6px 4px 0;
+    padding:10px 12px;
+
+}
+
+.btnEliminar{
+
+    background:#eb5757;
+
+}
+
+.btnEliminar:hover{
+
+    background:#c0392b;
+
+}
+
+.agendaVacia{
+
+    color:var(--color-texto-claro);
+    text-align:center !important;
+    padding:30px !important;
+
+}
+
+/* ==========================================
+   MODULOS DE PUESTOS
+========================================== */
+
+.tarjetaModulos{
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+.ayudaModulos{
+
+    color:var(--color-texto-claro);
+    margin-top:8px;
+
+}
+
+.modulosPuestos{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+    margin-top:20px;
+
+}
+
+.moduloPuestos{
+
+    border:1px solid var(--color-borde);
+    border-radius:16px;
+    padding:16px;
+    background:#fbfdff;
+
+}
+
+.moduloPuestos h3{
+
+    margin-bottom:12px;
+    color:var(--color-principal);
+
+}
+
+.moduloPuestos .gridPuestos{
+
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:8px;
+    margin-top:0;
+
+}
+
+.moduloPuestos .puesto{
+
+    min-height:78px;
+
+}
+
+.puestoSeleccionado{
+
+    outline:3px solid #f2c94c;
+    outline-offset:3px;
+
+}
+
+.colorLibre{
+
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    display:inline-block;
+    background:#eef2f7;
+    border:1px solid var(--color-borde);
+
+}
+
+.agendaMain{
+
+    grid-template-columns:minmax(280px,.8fr) minmax(520px,1.6fr);
+
+}
+
+@media(max-width:1000px){
+
+    .agendaMain{
+
+        grid-template-columns:1fr;
+
+    }
+
+}

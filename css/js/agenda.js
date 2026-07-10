@@ -4,6 +4,18 @@ const lista = document.getElementById("listaAgenda");
 
 const buscar = document.getElementById("buscar");
 
+const resumenAgenda = document.getElementById("resumenAgenda");
+
+const nombreInput = document.getElementById("nombre");
+
+const rubroInput = document.getElementById("rubro");
+
+const telefonoInput = document.getElementById("telefono");
+
+const instagramInput = document.getElementById("instagram");
+
+const feriaInput = document.getElementById("feria");
+
 let indiceEditar = null;
 
 mostrarAgenda();
@@ -20,15 +32,15 @@ const datos = obtenerDatos();
 
 const emprendedor={
 
-nombre:document.getElementById("nombre").value,
+nombre:nombreInput.value.trim(),
 
-rubro:document.getElementById("rubro").value,
+rubro:rubroInput.value.trim(),
 
-telefono:document.getElementById("telefono").value,
+telefono:telefonoInput.value.trim(),
 
-instagram:document.getElementById("instagram").value,
+instagram:instagramInput.value.trim(),
 
-feria:document.getElementById("feria").value
+feria:feriaInput.value
 
 };
 
@@ -52,6 +64,56 @@ mostrarAgenda();
 
 }
 
+function coincideBusqueda(persona,texto){
+
+return [persona.nombre, persona.rubro, persona.telefono, persona.instagram, persona.feria]
+
+.some(valor => (valor || "").toLowerCase().includes(texto));
+
+}
+
+function mostrarResumenAgenda(datos){
+
+const total=datos.agenda.length;
+
+const totalEuca=datos.agenda.filter(persona=>persona.feria === "EUCA").length;
+
+const totalPlate=datos.agenda.filter(persona=>persona.feria === "PLATE").length;
+
+resumenAgenda.innerHTML="";
+
+[
+
+{etiqueta:"Total", valor:total},
+
+{etiqueta:"EUCA", valor:totalEuca},
+
+{etiqueta:"PLATE", valor:totalPlate}
+
+].forEach(item=>{
+
+const card=document.createElement("div");
+
+card.className="resumenAgendaCard";
+
+const valor=document.createElement("strong");
+
+valor.textContent=item.valor;
+
+const etiqueta=document.createElement("span");
+
+etiqueta.textContent=item.etiqueta;
+
+card.appendChild(valor);
+
+card.appendChild(etiqueta);
+
+resumenAgenda.appendChild(card);
+
+});
+
+}
+
 function mostrarAgenda(){
 
 const datos=obtenerDatos();
@@ -60,49 +122,75 @@ const texto=buscar.value.toLowerCase();
 
 lista.innerHTML="";
 
-datos.agenda.forEach((persona,index)=>{
+mostrarResumenAgenda(datos);
 
-if(
+const emprendedoresFiltrados=datos.agenda
 
-persona.nombre.toLowerCase().includes(texto)||
+.map((persona,index)=>({persona,index}))
 
-persona.rubro.toLowerCase().includes(texto)
+.filter(({persona})=>coincideBusqueda(persona,texto));
 
-){
+if(emprendedoresFiltrados.length === 0){
 
-const card=document.createElement("div");
+const fila=document.createElement("tr");
 
-card.className="emprendedor";
+const celda=document.createElement("td");
 
-card.innerHTML=`
+celda.colSpan=6;
 
-<h3>${persona.nombre}</h3>
+celda.className="agendaVacia";
 
-<p>${persona.rubro}</p>
+celda.textContent=datos.agenda.length === 0 ? "Todavía no hay emprendedores cargados." : "No hay emprendedores que coincidan con la búsqueda.";
 
-<p>${persona.telefono}</p>
+fila.appendChild(celda);
 
-<p>${persona.instagram}</p>
+lista.appendChild(fila);
 
-<p>${persona.feria}</p>
-
-<button onclick="editar(${index})">
-
-Editar
-
-</button>
-
-<button onclick="eliminar(${index})">
-
-Eliminar
-
-</button>
-
-`;
-
-lista.appendChild(card);
+return;
 
 }
+
+emprendedoresFiltrados.forEach(({persona,index})=>{
+
+const fila=document.createElement("tr");
+
+[persona.nombre, persona.rubro, persona.telefono, persona.instagram, persona.feria].forEach(valor=>{
+
+const celda=document.createElement("td");
+
+celda.textContent=valor || "-";
+
+fila.appendChild(celda);
+
+});
+
+const acciones=document.createElement("td");
+
+const editarBtn=document.createElement("button");
+
+editarBtn.type="button";
+
+editarBtn.textContent="Editar";
+
+editarBtn.addEventListener("click",()=>editar(index));
+
+const eliminarBtn=document.createElement("button");
+
+eliminarBtn.type="button";
+
+eliminarBtn.textContent="Eliminar";
+
+eliminarBtn.className="btnEliminar";
+
+eliminarBtn.addEventListener("click",()=>eliminar(index));
+
+acciones.appendChild(editarBtn);
+
+acciones.appendChild(eliminarBtn);
+
+fila.appendChild(acciones);
+
+lista.appendChild(fila);
 
 });
 
@@ -114,15 +202,17 @@ const datos=obtenerDatos();
 
 const p=datos.agenda[i];
 
-nombre.value=p.nombre;
+if(!p)return;
 
-rubro.value=p.rubro;
+nombreInput.value=p.nombre;
 
-telefono.value=p.telefono;
+rubroInput.value=p.rubro;
 
-instagram.value=p.instagram;
+telefonoInput.value=p.telefono;
 
-feria.value=p.feria;
+instagramInput.value=p.instagram;
+
+feriaInput.value=p.feria;
 
 indiceEditar=i;
 
